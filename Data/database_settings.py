@@ -8,7 +8,6 @@ class DB:
         async with aiosqlite.connect(self.db_name) as db:
             await db.execute("""
                 CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY,
                     user_id INTEGER,
                     username TEXT,
                     start_time datetime,
@@ -17,6 +16,11 @@ class DB:
                     real_paid INTEGER
                 )
             """)
+            await db.commit()
+            
+    async def create_user(self, tg_id:int, username:str):
+        async with aiosqlite.connect(self.db_name) as db:
+            await db.execute("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)", (tg_id, username, None, None, 0, 0))
             await db.commit()
     
     async def get_user(self, tg_id:int):
