@@ -12,9 +12,8 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-@dp.message(Command(commands=['start']), isUserMessage())
-async def on_start(message:types.Message):
-    await bot.send_message(chat_id=message.from_user.id, 
-                           text=f'Добрый день, {message.from_user.username}\nВыбери пункт в меню', 
+@dp.message(Command(commands=['start']), isAdminMessage())
+async def start(message:types.Message):
+    await bot.send_message(chat_id=message.from_user.id,
+                           text=f'Ку админ, {message.from_user.username}\nВыбери пункт в меню',
                            reply_markup=start_menu())
-    
