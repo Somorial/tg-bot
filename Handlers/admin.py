@@ -6,7 +6,7 @@ from aiogram import Router, F
 from aiogram.enums.parse_mode import ParseMode
 from filters import isAdminCallback, isAdminMessage, isUserCallback, isUserMessage
 
-from keyboards import start_menu
+
 
 import logging
 
@@ -15,5 +15,4 @@ logging.basicConfig(level=logging.INFO)
 @dp.message(Command(commands=['start']), isAdminMessage())
 async def start(message:types.Message):
     await bot.send_message(chat_id=message.from_user.id,
-                           text=f'Ку админ, {message.from_user.username}\nВыбери пункт в меню',
-                           reply_markup=start_menu())
+                           text=f'Ку админ, {message.from_user.username}\nВыбери пункт в меню')
